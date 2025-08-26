@@ -22,6 +22,8 @@ import kmpbasico.composeapp.generated.resources.compose_multiplatform
 @Composable
 fun App() {
     MaterialTheme {
+        var name: String by remember { mutableStateOf("") }
+        var apellido: String by remember { mutableStateOf("") }
         Column (
             modifier = Modifier
                 .background(MaterialTheme.colorScheme.primaryContainer)
@@ -30,15 +32,42 @@ fun App() {
             horizontalAlignment = Alignment.CenterHorizontally
 
         ) {
-            Text(
-                text = "Hola mundo"
+            TextField(
+                value = name,
+                onValueChange = {
+                    name = it
+                }
             )
-            Text(
-                text = "Programacion 2"
+
+            Spacer(modifier = Modifier.height(40.dp))
+
+            Spacer(modifier = Modifier.height(45.dp))
+
+            AnimatedVisibility(name.isNotEmpty()) {
+                Text(
+                    text = "Versión animada $name",
+                    fontSize = 24.sp
+                )
+            }
+
+            TextField(
+                value = apellido,
+                onValueChange = {
+                    apellido = it
+                }
             )
-            Text(
-                text = "Android Studio"
-            )
+
+            Spacer(modifier = Modifier.height(40.dp))
+
+            Spacer(modifier = Modifier.height(50.dp))
+
+            AnimatedVisibility(apellido.isNotEmpty()) {
+                Text(
+                    text = "Versión animada $apellido",
+                    fontSize = 24.sp
+                )
+            }
+
         }
     }
 }
